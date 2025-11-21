@@ -20,7 +20,7 @@ const MiniGame: React.FC = () => {
     if (newCount === 52) {
       setShowCelebration(true);
       setTimeout(() => setShowCelebration(false), 5000);
-      setCount(0); // Reset or keep counting? Let's reset to play again
+      setCount(0); // Reset to play again
     }
 
     // Create particle
@@ -47,7 +47,7 @@ const MiniGame: React.FC = () => {
     <>
       {/* Celebration Overlay */}
       {showCelebration && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/20 backdrop-blur-sm animate-pop">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/20 backdrop-blur-sm animate-appear">
           <div className="text-center">
             <Heart className="w-32 h-32 text-rose-500 fill-rose-500 animate-ping-slow mx-auto mb-4" />
             <h2 className="text-4xl md:text-6xl font-script text-white drop-shadow-lg font-bold">
