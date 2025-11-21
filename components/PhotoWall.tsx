@@ -38,11 +38,18 @@ const imageUrls = [
   "https://raw.githubusercontent.com/fandunjin/fdjlovezj/main/5541b2dc5e3bba9b6c33ee2117e077a.jpg"
 ];
 
-const PhotoWall: React.FC = () => {
+interface PhotoWallProps {
+  customImages?: string[];
+}
+
+const PhotoWall: React.FC<PhotoWallProps> = ({ customImages = [] }) => {
+  // Combine default images with custom images
+  const allImages = [...customImages, ...imageUrls];
+
   // Split images into 3 columns for better distribution
-  const col1 = imageUrls.slice(0, Math.ceil(imageUrls.length / 3));
-  const col2 = imageUrls.slice(Math.ceil(imageUrls.length / 3), Math.ceil(imageUrls.length / 3) * 2);
-  const col3 = imageUrls.slice(Math.ceil(imageUrls.length / 3) * 2);
+  const col1 = allImages.slice(0, Math.ceil(allImages.length / 3));
+  const col2 = allImages.slice(Math.ceil(allImages.length / 3), Math.ceil(allImages.length / 3) * 2);
+  const col3 = allImages.slice(Math.ceil(allImages.length / 3) * 2);
 
   // Duplicate arrays to create seamless loop effect
   const renderColumn = (images: string[], animateClass: string) => (

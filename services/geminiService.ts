@@ -15,7 +15,7 @@ export const polishMessage = async (text: string, style: 'romantic' | 'poetic' |
 
   try {
     const prompt = `
-      You are a romantic writing assistant helping a boyfriend write a daily note to his long-distance girlfriend.
+      You are a romantic writing assistant helping dunjinfan write a daily note to his long-distance girlfriend zhaojin.
       Please rewrite the following text to be more ${style}, warm, and loving. Keep it concise (under 100 words).
       
       Original text: "${text}"
@@ -35,10 +35,10 @@ export const polishMessage = async (text: string, style: 'romantic' | 'poetic' |
 
 export const suggestDailyTopic = async (): Promise<string> => {
   const ai = getAiClient();
-  if (!ai) return "Tell her what you miss most about her today.";
+  if (!ai) return "Tell zhaojin what you miss most about her today.";
 
   try {
-    const prompt = "Give me one short, creative, and specific prompt for a boyfriend to write to his long-distance girlfriend today. It should be sweet and engaging.";
+    const prompt = "Give me one short, creative, and specific prompt for dunjinfan to write to his long-distance girlfriend zhaojin today. It should be sweet and engaging.";
     
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
