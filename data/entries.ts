@@ -29,6 +29,12 @@ export const pinnedLetter: DiaryEntry = {
 // 每日更新 (Daily Updates) - 最新的写在最上面
 export const dailyUpdates: DiaryEntry[] = [
   // 在这里添加新的内容...
+  {
+    id: 'update-251122',
+    date: new Date().toISOString(),
+    title: '为什么要重做网站呢',
+    content: '最后一个月，希望我的宝宝每次打开这个网站，都会开心放松一点点。'
+  },
   
   {
     id: 'update-demo-1',
