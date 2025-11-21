@@ -3,6 +3,7 @@ import Timer from './components/Timer';
 import EntryList from './components/EntryList';
 import WeatherSystem from './components/WeatherSystem';
 import MiniGame from './components/MiniGame';
+import MemoryGame from './components/MemoryGame';
 import { pinnedLetter, dailyUpdates } from './data/entries';
 import { DiaryEntry } from './types';
 
@@ -35,10 +36,10 @@ const App: React.FC = () => {
       <div className="fixed inset-0 -z-20 bg-gradient-to-br from-orange-50 via-rose-50 to-amber-50"></div>
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(255,228,230,0.6),transparent_70%)]"></div>
       
-      {/* Weather & Seasonal Effects */}
+      {/* Weather & Seasonal Effects (Widget Removed) */}
       <WeatherSystem />
 
-      {/* Mini Game (Bottom Left) */}
+      {/* Heartbeat Mini Game (Bottom Left) */}
       <MiniGame />
       
       <div className="max-w-4xl mx-auto px-4 py-12 relative z-10">
@@ -64,6 +65,16 @@ const App: React.FC = () => {
         {/* Content Section */}
         <section className="relative">
             <EntryList pinnedLetter={pinnedLetter} dailyUpdates={allUpdates} />
+        </section>
+
+        {/* New Mini Game Section */}
+        <section className="mt-24 relative">
+            <div className="flex items-center gap-4 mb-6 px-8 opacity-60">
+                  <div className="h-px flex-1 bg-gradient-to-r from-transparent to-rose-300/50"></div>
+                  <span className="text-xs font-serif text-rose-400 tracking-widest uppercase">Game Zone</span>
+                  <div className="h-px flex-1 bg-gradient-to-l from-transparent to-rose-300/50"></div>
+            </div>
+            <MemoryGame />
         </section>
 
       </div>

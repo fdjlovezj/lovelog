@@ -6,8 +6,8 @@ import { DiaryEntry } from '../types';
 // 2. 复制并粘贴以下代码块到数组的最前面：
 //
 // {
-//   id: 'update-日期',
-//   date: '2024-03-21T09:00:00',
+//   id: 'update-20240321', // 确保ID唯一
+//   date: '2024-03-21T09:00:00', // 【重要】请手动填写固定时间，格式：YYYY-MM-DDTHH:mm:ss
 //   title: '今日心情', // 可选
 //   content: `在这里写下你想对瑾说的话...`
 // },
@@ -29,16 +29,10 @@ export const pinnedLetter: DiaryEntry = {
 // 每日更新 (Daily Updates) - 最新的写在最上面
 export const dailyUpdates: DiaryEntry[] = [
   // 在这里添加新的内容...
-  {
-    id: 'update-251122',
-    date: new Date().toISOString(),
-    title: '为什么要重做网站呢',
-    content: '最后一个月，希望我的宝宝每次打开这个网站，都会开心放松一点点。'
-  },
   
   {
     id: 'update-demo-1',
-    date: new Date().toISOString(),
+    date: '2024-03-21T22:00:00', // 已修改为固定时间，不会随刷新改变
     title: '碎碎念',
     content: '今天在想，如果思念有声音，恐怕你已经被我吵得睡不着了吧。'
   },
