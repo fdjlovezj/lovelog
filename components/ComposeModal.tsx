@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MoodType } from '../types';
 import { polishMessage, suggestDailyTopic } from '../services/geminiService';
 import { compressImage } from '../utils/imageHelpers';
@@ -8,10 +8,11 @@ interface ComposeModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (content: string, mood: MoodType, aiEnhanced: boolean, images: string[]) => void;
+  initialContent?: string;
 }
 
-const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose, onSave }) => {
-  const [content, setContent] = useState('');
+const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose, onSave, initialContent = '' }) => {
+  const [content, setContent] = useState(initialContent);
   const [mood, setMood] = useState<MoodType>(MoodType.HAPPY);
   const [isEnhancing, setIsEnhancing] = useState(false);
   const [aiEnhanced, setAiEnhanced] = useState(false);
@@ -20,6 +21,14 @@ const ComposeModal: React.FC<ComposeModalProps> = ({ isOpen, onClose, onSave }) 
   const [isProcessingImage, setIsProcessingImage] = useState(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Update content when initialContent changes (e.g., from AI generation in parent)
+  useEffect(() => {
+    if (isOpen && initialContent) {
+      setContent(initialContent);
+      setMood(MoodType.ROMANTIC); // Default to romantic for love notes
+    }
+  }, [initialContent, isOpen]);
 
   if (!isOpen) return null;
 

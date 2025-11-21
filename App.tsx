@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Timer from './components/Timer';
 import EntryList from './components/EntryList';
 import WeatherSystem from './components/WeatherSystem';
 import MiniGame from './components/MiniGame';
 import { pinnedLetter, dailyUpdates } from './data/entries';
+import { DiaryEntry } from './types';
 
 // Start date: September 20, 2023
 const START_DATE = '2023-09-20T00:00:00';
 
 const App: React.FC = () => {
+  // State for local entries that user adds during session
+  const [localEntries, setLocalEntries] = useState<DiaryEntry[]>([]);
+
+  // Load any locally saved entries on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('local_love_notes');
+    if (saved) {
+      try {
+        setLocalEntries(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse local notes");
+      }
+    }
+  }, []);
+
+  // Combine hardcoded updates with local updates
+  const allUpdates = [...localEntries, ...dailyUpdates];
+
   return (
     <div className="min-h-screen font-sans selection:bg-rose-300/50 relative text-stone-800 overflow-x-hidden bg-stone-50">
       
@@ -44,14 +63,15 @@ const App: React.FC = () => {
 
         {/* Content Section */}
         <section className="relative">
-            <EntryList pinnedLetter={pinnedLetter} dailyUpdates={dailyUpdates} />
+            <EntryList pinnedLetter={pinnedLetter} dailyUpdates={allUpdates} />
         </section>
 
       </div>
       
-      <footer className="text-center py-8 text-rose-900/30 text-xs font-medium relative z-10">
+      <footer className="text-center py-8 text-rose-900/30 text-xs font-medium relative z-10 mb-16 md:mb-0">
         <p className="tracking-widest uppercase">Forever & Always · fandunjin & zhaojin</p>
       </footer>
+
     </div>
   );
 };

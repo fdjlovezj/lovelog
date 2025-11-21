@@ -36,7 +36,7 @@ const MiniGame: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-8 left-8 z-40 hidden md:flex flex-col items-center gap-2">
+    <div className="fixed bottom-8 left-8 z-40 flex flex-col items-center gap-2">
        {/* Click Count Badge */}
        <div className="bg-white/80 text-rose-600 px-3 py-1 rounded-full text-xs font-mono border border-rose-200 backdrop-blur-sm shadow-sm">
           Miss You x {count}
