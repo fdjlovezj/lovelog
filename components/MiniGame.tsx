@@ -19,8 +19,10 @@ const MiniGame: React.FC = () => {
     // Trigger celebration at 52 clicks
     if (newCount === 52) {
       setShowCelebration(true);
-      setTimeout(() => setShowCelebration(false), 5000);
+      // Extend duration to 8 seconds
+      const timer = setTimeout(() => setShowCelebration(false), 8000);
       setCount(0); // Reset to play again
+      return () => clearTimeout(timer);
     }
 
     // Create particle
@@ -45,15 +47,19 @@ const MiniGame: React.FC = () => {
 
   return (
     <>
-      {/* Celebration Overlay */}
+      {/* Celebration Overlay - Click to dismiss */}
       {showCelebration && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/20 backdrop-blur-sm animate-appear">
-          <div className="text-center">
-            <Heart className="w-32 h-32 text-rose-500 fill-rose-500 animate-ping-slow mx-auto mb-4" />
-            <h2 className="text-4xl md:text-6xl font-script text-white drop-shadow-lg font-bold">
+        <div 
+          onClick={() => setShowCelebration(false)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm animate-appear cursor-pointer"
+        >
+          <div className="text-center pointer-events-none"> {/* Prevent clicks on text from bubbling strictly if needed, but here we want click anywhere to close */}
+            <Heart className="w-32 h-32 text-rose-500 fill-rose-500 animate-ping-slow mx-auto mb-4 drop-shadow-2xl" />
+            <h2 className="text-4xl md:text-6xl font-script text-white drop-shadow-lg font-bold tracking-wider">
               I Love You 52 Times!
             </h2>
-            <p className="text-white/90 mt-2 font-serif">And a million times more...</p>
+            <p className="text-white/90 mt-4 font-serif text-lg animate-pulse">And a million times more...</p>
+            <p className="text-white/50 mt-8 text-xs uppercase tracking-widest">(Tap to close)</p>
           </div>
         </div>
       )}
